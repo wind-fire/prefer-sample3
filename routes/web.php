@@ -23,7 +23,7 @@ Route::get('/help','StaticPagesController@help')->name('help');
 Route::get('/about','StaticPagesController@about')->name('about');
 
 
-Route::get('/login','UsersController@login')->name('login');
+//Route::get('/login','UsersController@login')->name('login');
 Route::get('/signup','UsersController@create')->name('signup');
 
 
@@ -44,3 +44,6 @@ Route::patch('/users/{user}', 'UsersController@update')->name('users.update'); /
 Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy'); //删除个人用户
 
 */
+Route::get('/login','SessionsController@create')->name('login'); //显示登录界面
+Route::post('/login','SessionsController@store')->name('login'); //创建新会话（登录）
+Route::delete('/logout','SessionsController@destroy')->name('logout'); //销毁会话（退出登录）
