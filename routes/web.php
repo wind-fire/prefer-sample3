@@ -15,7 +15,7 @@
     return view('welcome');
 });*/
 
-use App\Http\Controllers\UsersController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/','StaticPagesController@home')->name('home');
@@ -47,3 +47,8 @@ Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy')
 Route::get('/login','SessionsController@create')->name('login'); //显示登录界面
 Route::post('/login','SessionsController@store')->name('login'); //创建新会话（登录）
 Route::delete('/logout','SessionsController@destroy')->name('logout'); //销毁会话（退出登录）
+
+/* 用户激活 */
+
+Route::get('/signup/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
+
