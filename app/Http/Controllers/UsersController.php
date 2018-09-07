@@ -118,7 +118,7 @@ class UsersController extends Controller
     /*发送激活邮件*/
     protected function sendConfirmEmail($user)
     {
-        $view = 'emails.confirm';
+       /* $view = 'emails.confirm';
         $from = 'fire199010@gmail.com';
         $name = 'PreferMa';
         $data = compact('user');
@@ -128,6 +128,17 @@ class UsersController extends Controller
         Mail::send($view,$data,function($message) use($from,$name,$to,$subject) {
             $message->from($from,$name)->to($to)->subject($subject);
 
+        });*/
+
+        /*现在我们已经在环境配置文件完善了邮件的发送配置，因此不再需要使用 from 方法：*/
+
+        $view = 'emails.confirm';
+        $data = compact('user');
+        $to = $user->email;
+        $subject = "感谢注册 Sample 应用！请确认你的邮箱。";
+
+        Mail::send($view, $data, function ($message) use ($to, $subject) {
+            $message->to($to)->subject($subject);
         });
     }
 
