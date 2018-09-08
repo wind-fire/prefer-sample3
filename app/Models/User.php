@@ -15,6 +15,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -56,6 +63,12 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));
+    }
+
+    public function feed()
+    {
+        return $this->statuses()
+                    ->orderBy('created_at','desc');
     }
 
 
